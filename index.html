@@ -1,26 +1,262 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>party-blast-calendar-joy</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="party-blast-calendar-joy" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>Birthday Blast - Never Forget a Birthday!</title>
+    <meta name="description" content="Your personalized birthday reminder and celebration assistant" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
 
   <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="confetti-container"></div>
+    
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1><span>Birthday</span> Blast</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#reminders">Reminders</a></li>
+            <li><a href="#gifts">Gift Ideas</a></li>
+            <li><a href="#tunes">Celebration Tunes</a></li>
+          </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h2>Never Forget a <span>Birthday</span> Again!</h2>
+            <p>Set up reminders, find perfect gifts, and celebrate your loved ones in style.</p>
+            <button class="btn-primary" id="get-started-btn">Get Started</button>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Birthday celebration" />
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="container">
+          <h2>Make Every Birthday <span>Special</span></h2>
+          <div class="feature-cards">
+            <div class="feature-card" data-aos="fade-up">
+              <div class="icon">
+                <i class="fas fa-bell"></i>
+              </div>
+              <h3>Smart Reminders</h3>
+              <p>Get notifications days before important birthdays so you never miss celebrating a loved one.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon">
+                <i class="fas fa-gift"></i>
+              </div>
+              <h3>Gift Ideas</h3>
+              <p>Discover and save perfect gift ideas tailored to each person on your birthday list.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon">
+                <i class="fas fa-music"></i>
+              </div>
+              <h3>Celebration Tunes</h3>
+              <p>Send musical birthday wishes with our collection of celebration tunes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="birthday-management" id="reminders">
+        <div class="container">
+          <h2>Birthday <span>Reminders</span></h2>
+          <div class="birthday-form-container">
+            <form id="birthday-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter name" required />
+              </div>
+              <div class="form-group">
+                <label for="birth-date">Birth Date</label>
+                <input type="date" id="birth-date" required />
+              </div>
+              <div class="form-group">
+                <label for="relation">Relationship</label>
+                <select id="relation">
+                  <option value="friend">Friend</option>
+                  <option value="family">Family</option>
+                  <option value="colleague">Colleague</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="remind-days">Remind Me</label>
+                <select id="remind-days">
+                  <option value="1">1 day before</option>
+                  <option value="3">3 days before</option>
+                  <option value="7">1 week before</option>
+                  <option value="14">2 weeks before</option>
+                </select>
+              </div>
+              <button type="submit" class="btn-primary">Add Birthday</button>
+            </form>
+          </div>
+
+          <div class="birthday-list-container">
+            <h3>Upcoming Birthdays</h3>
+            <div id="birthday-list" class="birthday-list">
+              <!-- Birthday entries will be added here by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gifts" id="gifts">
+        <div class="container">
+          <h2>Gift <span>Ideas</span></h2>
+          <div class="gift-management">
+            <div class="gift-form">
+              <h3>Add a Gift Idea</h3>
+              <form id="gift-form">
+                <div class="form-group">
+                  <label for="gift-name">Gift Idea</label>
+                  <input type="text" id="gift-name" placeholder="Enter gift idea" required />
+                </div>
+                <div class="form-group">
+                  <label for="gift-for">For Who</label>
+                  <select id="gift-for">
+                    <option value="">Select a person</option>
+                    <!-- Options will be added by JavaScript -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="gift-price">Approximate Price ($)</label>
+                  <input type="number" id="gift-price" placeholder="Enter price" min="0" />
+                </div>
+                <div class="form-group">
+                  <label for="gift-url">Link (Optional)</label>
+                  <input type="url" id="gift-url" placeholder="https://example.com" />
+                </div>
+                <button type="submit" class="btn-primary">Save Gift Idea</button>
+              </form>
+            </div>
+            <div class="gift-list">
+              <h3>Your Gift Ideas</h3>
+              <div id="gift-ideas-list">
+                <!-- Gift ideas will be added here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tunes" id="tunes">
+        <div class="container">
+          <h2>Celebration <span>Tunes</span></h2>
+          <div class="tunes-container">
+            <div class="tune-player">
+              <h3>Birthday Songs</h3>
+              <div class="song-list">
+                <div class="song" data-song="classic">
+                  <div class="song-info">
+                    <h4>Classic Birthday Song</h4>
+                    <p>Traditional Happy Birthday</p>
+                  </div>
+                  <button class="play-btn" data-song="happy-birthday-traditional.mp3">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+                <div class="song" data-song="kids">
+                  <div class="song-info">
+                    <h4>Kids Birthday Party</h4>
+                    <p>Fun and upbeat celebration</p>
+                  </div>
+                  <button class="play-btn" data-song="kids-birthday.mp3">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+                <div class="song" data-song="jazz">
+                  <div class="song-info">
+                    <h4>Jazz Birthday</h4>
+                    <p>Smooth jazz rendition</p>
+                  </div>
+                  <button class="play-btn" data-song="jazz-birthday.mp3">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+                <div class="song" data-song="rock">
+                  <div class="song-info">
+                    <h4>Rock Birthday</h4>
+                    <p>Rock and roll celebration</p>
+                  </div>
+                  <button class="play-btn" data-song="rock-birthday.mp3">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+              </div>
+              <div id="audio-player">
+                <audio id="audio-element" controls></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="call-to-action">
+        <div class="container">
+          <h2>Ready to <span>Never Miss</span> a Birthday?</h2>
+          <p>Start using Birthday Blast today and make every celebration special!</p>
+          <button class="btn-secondary" id="scroll-to-top">Get Started Now</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <h3><span>Birthday</span> Blast</h3>
+            <p>Your ultimate birthday reminder assistant</p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#reminders">Reminders</a></li>
+              <li><a href="#gifts">Gift Ideas</a></li>
+              <li><a href="#tunes">Celebration Tunes</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p><i class="fas fa-envelope"></i> hello@birthdayblast.com</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 Birthday Blast. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="notification" id="notification">
+      <p id="notification-message"></p>
+      <span class="notification-close">&times;</span>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
